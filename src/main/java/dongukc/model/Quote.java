@@ -5,20 +5,22 @@ public class Quote {
     private Long id;
     private String text;
     private String source;
+    private Long authorId;
     private String authorName;
     
 
     public Quote() {}
 
-    public Quote(String text, String source, String authorName) {
+    public Quote(String text, String source, Long authorId, String authorName) {
         this.text = text;
         this.source = source;
+        this.authorId = authorId;
         this.authorName = authorName;
     }
 
     @Override
     public String toString() {
-        return String.format("Quote[id=%d, text='%s', by='%s']", this.id, this.text, this.authorName);
+        return String.format("Quote[id=%d, text='%s', authorName='%s']", this.id, this.text, this.authorName);
     }
 
     public String getText() {
@@ -37,6 +39,14 @@ public class Quote {
         this.source = source;
     }
 
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+    
     public String getAuthorName() {
         return authorName;
     }

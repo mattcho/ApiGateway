@@ -3,7 +3,6 @@ package dongukc.model;
 public class Author {
     private Long id;
     private String name;
-    
 
     protected Author() {}
 

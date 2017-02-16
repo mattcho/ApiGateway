@@ -1,0 +1,5 @@
+---
+applications:
+- name: ApiGateway2
+  path: ./build/libs/ApiGateway2-0.0.1-SNAPSHOT.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git

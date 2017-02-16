@@ -8,7 +8,7 @@ import dongukc.model.Author;
 public interface AuthorService {
 
     Author findByName(String name);
-    Author save(String authorName);
+    Long save(Author author);
     Author findById(Long id);
 
 }

@@ -1,10 +1,13 @@
 package dongukc.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import dongukc.model.Author;
 
+@Service
 public class AuthorServiceImpl implements AuthorService {
 	
 	@Value("${service.author.uri}")
@@ -19,10 +22,11 @@ public class AuthorServiceImpl implements AuthorService {
 	}
 
 	@Override
-	public Author save(String authorName) {
+	public Long save(Author a) {
 		RestTemplate restTemplate = new RestTemplate();
     	String uri = authorServiceUri;
-    	return restTemplate.postForObject(uri, authorName, Author.class);
+    	ResponseEntity<Long> re = restTemplate.postForEntity(uri, a, Long.class);
+    	return re.getBody();
 	}
 
 	public Author findById(Long id) {

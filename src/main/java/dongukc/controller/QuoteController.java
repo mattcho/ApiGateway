@@ -34,16 +34,24 @@ public class QuoteController {
     
     @RequestMapping(value = "/api/quote", method = RequestMethod.POST)
     public void saveQuote(@RequestBody Quote quote) {
-        System.out.println(quote);
-        
+    	
         Author a = authorService.findByName(quote.getAuthorName());
         
         if (a == null) {
-            System.out.println("Saving author");
-            authorService.save(quote.getAuthorName());
+        	System.out.println("Saving author");
+        	a = new Author(quote.getAuthorName());
+        	authorService.save(a);
+        	a = authorService.findByName(quote.getAuthorName());
         }
+        
+        quote.setAuthorId(a.getId());
         
         System.out.println("Saving quote");
         quoteService.save(quote);
+    }
+    
+    @RequestMapping("/api/author/{author_id}")
+    public Author getAuthor(@PathVariable("author_id") Long authorId) {
+       return authorService.findById(authorId);
     }
 }

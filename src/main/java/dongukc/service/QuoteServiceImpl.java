@@ -20,13 +20,13 @@ public class QuoteServiceImpl implements QuoteService {
     	
     	System.out.println("random Quote!");
     	
-//    	RestTemplate restTemplate = new RestTemplate();
-//    	String uri = quoteServiceUri + "/random";
-//    	
-//    	System.out.println(uri);
-//    	
-//    	Quote quote = restTemplate.getForObject(uri, Quote.class);
-    	return new Quote();
+    	RestTemplate restTemplate = new RestTemplate();
+    	String uri = quoteServiceUri + "/random";
+    	
+    	System.out.println(uri);
+    	
+    	Quote quote = restTemplate.getForObject(uri, Quote.class);
+    	return quote;
     }
     
     @Override
