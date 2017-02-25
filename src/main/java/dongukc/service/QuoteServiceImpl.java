@@ -3,6 +3,7 @@ package dongukc.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
@@ -18,19 +19,15 @@ public class QuoteServiceImpl implements QuoteService {
 //	private String quoteServiceUri;
 	private String quoteServiceUri = "http://quoteservice/api/quote";
 	
-	
-	@LoadBalanced
-    @Bean
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+	@Autowired
+    RestTemplate restTemplate;
 	   
     @Override
     public Quote randomQuote() {
     	
     	System.out.println("random Quote!");
     	
-    	RestTemplate restTemplate = new RestTemplate();
+//    	RestTemplate restTemplate = new RestTemplate();
     	String uri = quoteServiceUri + "/random";
     	
     	System.out.println(uri);
@@ -41,7 +38,7 @@ public class QuoteServiceImpl implements QuoteService {
     
     @Override
     public Iterable<Quote> getQuotesByAuthorId(Long authorId) {
-    	RestTemplate restTemplate = new RestTemplate();
+//    	RestTemplate restTemplate = new RestTemplate();
     	String uri = quoteServiceUri + "/" + authorId;
     	List<Quote> list = restTemplate.getForObject(uri, ArrayList.class);
     	return list;
@@ -49,7 +46,7 @@ public class QuoteServiceImpl implements QuoteService {
 
 	@Override
 	public Quote save(Quote quote) {
-		RestTemplate restTemplate = new RestTemplate();
+//		RestTemplate restTemplate = new RestTemplate();
     	String uri = quoteServiceUri;
     	return restTemplate.postForObject(uri, quote, Quote.class);
 	}
