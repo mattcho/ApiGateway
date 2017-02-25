@@ -17,7 +17,7 @@ public class QuoteServiceImpl implements QuoteService {
 	
 //	@Value("${service.quote.uri}")
 //	private String quoteServiceUri;
-	private String quoteServiceUri = "http://quoteservice/api/quote";
+	private String quoteServiceUri = "http://quoteService/api/quote";
 	
 	@Autowired
     RestTemplate restTemplate;

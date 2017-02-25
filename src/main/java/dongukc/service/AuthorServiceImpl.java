@@ -17,7 +17,7 @@ public class AuthorServiceImpl implements AuthorService {
 	
 //	@Value("${service.author.uri}")
 //	private String authorServiceUri;
-	private String authorServiceUri = "http://authorservice/api/author";
+	private String authorServiceUri = "http://authorService/api/author";
 	
 	@Autowired
     RestTemplate restTemplate;
