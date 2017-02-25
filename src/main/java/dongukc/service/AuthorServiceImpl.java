@@ -10,8 +10,8 @@ import dongukc.model.Author;
 @Service
 public class AuthorServiceImpl implements AuthorService {
 	
-	@Value("${service.author.uri}")
-	private String authorServiceUri;
+//	@Value("${service.author.uri}")
+	private String authorServiceUri = "http://authorService/api/author";
 
 	@Override
 	public Author findByName(String name) {
