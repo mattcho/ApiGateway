@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import dongukc.model.Author;
@@ -13,8 +14,9 @@ import dongukc.model.Author;
 @Service
 public class AuthorServiceImpl implements AuthorService {
 	
-//	@Value("${service.author.uri}")
-	private String authorServiceUri = "http://AUTHORSERVICE/api/author";
+	@Value("${service.author.uri}")
+	private String authorServiceUri;
+//	private String authorServiceUri = "http://AUTHORSERVICE/api/author";
 
 	@Override
 	public Author findByName(String name) {
@@ -40,7 +42,7 @@ public class AuthorServiceImpl implements AuthorService {
     	return author;
 	}
 	
-	public Author reliableFindById() {
+	public Author reliableFindById(Long id) {
 		Author a = new Author("Mr. Reliable");
 		return a;
 	}

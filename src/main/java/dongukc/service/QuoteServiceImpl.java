@@ -14,8 +14,9 @@ import dongukc.model.Quote;
 @Service
 public class QuoteServiceImpl implements QuoteService {
 	
-//	@Value("${service.author.uri}")
-	private String quoteServiceUri = "http://QUOTESERVICE/api/quote";
+	@Value("${service.quote.uri}")
+	private String quoteServiceUri;
+//	private String quoteServiceUri = "http://QUOTESERVICE/api/quote";
 	   
     @Override
     public Quote randomQuote() {
