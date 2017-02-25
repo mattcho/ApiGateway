@@ -14,9 +14,15 @@ import dongukc.model.Author;
 @Service
 public class AuthorServiceImpl implements AuthorService {
 	
-	@Value("${service.author.uri}")
-	private String authorServiceUri;
-//	private String authorServiceUri = "http://AUTHORSERVICE/api/author";
+//	@Value("${service.author.uri}")
+//	private String authorServiceUri;
+	private String authorServiceUri = "http://authorservice/api/author";
+	
+	@LoadBalanced
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
 	@Override
 	public Author findByName(String name) {

@@ -14,9 +14,16 @@ import dongukc.model.Quote;
 @Service
 public class QuoteServiceImpl implements QuoteService {
 	
-	@Value("${service.quote.uri}")
-	private String quoteServiceUri;
-//	private String quoteServiceUri = "http://QUOTESERVICE/api/quote";
+//	@Value("${service.quote.uri}")
+//	private String quoteServiceUri;
+	private String quoteServiceUri = "http://quoteservice/api/quote";
+	
+	
+	@LoadBalanced
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 	   
     @Override
     public Quote randomQuote() {
