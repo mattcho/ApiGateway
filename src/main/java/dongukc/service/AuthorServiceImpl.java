@@ -1,9 +1,12 @@
 package dongukc.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 import dongukc.model.Author;
 
@@ -11,7 +14,7 @@ import dongukc.model.Author;
 public class AuthorServiceImpl implements AuthorService {
 	
 //	@Value("${service.author.uri}")
-	private String authorServiceUri = "http://authorService/api/author";
+	private String authorServiceUri = "http://AUTHORSERVICE/api/author";
 
 	@Override
 	public Author findByName(String name) {
@@ -28,12 +31,17 @@ public class AuthorServiceImpl implements AuthorService {
     	ResponseEntity<Long> re = restTemplate.postForEntity(uri, a, Long.class);
     	return re.getBody();
 	}
-
+	
+	@HystrixCommand(fallbackMethod = "reliableFindById")
 	public Author findById(Long id) {
 		RestTemplate restTemplate = new RestTemplate();
     	String uri = authorServiceUri + "/" + id;
     	Author author = restTemplate.getForObject(uri, Author.class);
     	return author;
 	}
-
+	
+	public Author reliableFindById() {
+		Author a = new Author("Mr. Reliable");
+		return a;
+	}
 }

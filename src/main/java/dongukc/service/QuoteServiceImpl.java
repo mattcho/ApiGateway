@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,7 +15,7 @@ import dongukc.model.Quote;
 public class QuoteServiceImpl implements QuoteService {
 	
 //	@Value("${service.author.uri}")
-	private String quoteServiceUri = "http://quoteService/api/quote";
+	private String quoteServiceUri = "http://QUOTESERVICE/api/quote";
 	   
     @Override
     public Quote randomQuote() {
@@ -42,5 +44,6 @@ public class QuoteServiceImpl implements QuoteService {
 		RestTemplate restTemplate = new RestTemplate();
     	String uri = quoteServiceUri;
     	return restTemplate.postForObject(uri, quote, Quote.class);
-	}	
+	}
 }
+
